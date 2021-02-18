@@ -21,15 +21,16 @@ import {
 } from "@arco-design/web-react/icon";
 import heroBanner1 from "../src/assets/hero-banner-1.png";
 import heroBanner2 from "../src/assets/hero-banner-2.png";
+import heroBanner3 from "../src/assets/hero-banner-3.png";
 import floatIcon1 from "../src/assets/logo_ArcoMaterial_w.svg";
 import floatIcon2 from "../src/assets/logo_ArcoPro_w.svg";
 import floatIcon3 from "../src/assets/logo_ChartSpace_w.svg";
 import floatIcon4 from "../src/assets/logo_DesignLab_w.svg";
 import Parallax from "parallax-js";
-import { gsap, TweenLite, TimelineMax, MotionPathPlugin } from "gsap/all";
+import { gsap, MotionPathPlugin } from "gsap/all";
 gsap.registerPlugin(MotionPathPlugin);
 
-const imageSrc = [heroBanner1, heroBanner2];
+const imageSrc = [heroBanner1, heroBanner2, heroBanner3];
 const GlobalStyle = createGlobalStyle`
   ${reset}
   `;
@@ -228,16 +229,46 @@ const AppCss = styled.div`
               /* border-radius: 100%; */
               margin-right: 6px;
             }
-            svg {
-              border: 1px solid #5f00fb;
-              path {
-                transition: all 0.3s ease;
-              }
-              &:hover {
+
+            span {
+              position: relative;
+              width: 100%;
+              height: 60px;
+
+              svg {
+                position: absolute;
+                transition: all 0.2s ease;
+
                 path {
-                  fill: transparent;
-                  stroke: #5f00fb;
+                  transition: all 0.2s ease;
                 }
+
+                &:nth-of-type(1) {
+                  /* z-index: 2;
+                  left: -3px; */
+
+                  &:hover {
+                    path {
+                      fill: transparent;
+                      stroke: #5f00fb;
+                      stroke-width: 0.7px;
+                    }
+                  }
+                }
+                /* &:nth-of-type(2) {
+                  top: 3px;
+                  left: 3px;
+                  border: 1px solid #5f00fb;
+                  path {
+                    transition: all 0.3s ease;
+                  }
+                  &:hover {
+                    path {
+                      fill: transparent;
+                      stroke: #5f00fb;
+                    }
+                  }
+                } */
               }
             }
           }
@@ -629,6 +660,19 @@ const AppCss = styled.div`
                   background: white;
                   border-radius: 100%;
                   color: #0e42d2;
+                  border: 1px solid transparent;
+                  transition: all 0.2s ease;
+
+                  path,
+                  circle {
+                    transition: all 0.2s ease;
+                  }
+
+                  &:hover {
+                    background: transparent;
+                    stroke: white;
+                    border: 1px solid #ffffff;
+                  }
 
                   &:nth-of-type(1):not(.arco-badge .arco-icon) {
                     width: 20px;
@@ -637,6 +681,12 @@ const AppCss = styled.div`
                     border: 1px solid #ffffff;
                     background: transparent;
                     color: white;
+
+                    &:hover {
+                      background: white;
+                      stroke: #0e42d2;
+                      border: 1px solid transparent;
+                    }
                   }
                   &:nth-of-type(2):not(.arco-badge .arco-icon) {
                     width: 12px;
@@ -645,6 +695,12 @@ const AppCss = styled.div`
                     border: 1px solid #ffffff;
                     background: transparent;
                     color: white;
+
+                    &:hover {
+                      background: white;
+                      stroke: #0e42d2;
+                      border: 1px solid transparent;
+                    }
                   }
                   &:nth-of-type(3):not(.arco-badge .arco-icon) {
                     width: 8px;
@@ -653,6 +709,12 @@ const AppCss = styled.div`
                     border: 1px solid #ffffff;
                     background: transparent;
                     color: white;
+
+                    &:hover {
+                      background: white;
+                      stroke: #0e42d2;
+                      border: 1px solid transparent;
+                    }
                   }
                 }
               }
@@ -660,6 +722,7 @@ const AppCss = styled.div`
                 width: calc(100% - 40px);
                 display: flex;
                 justify-content: space-between;
+
                 .arco-icon {
                   width: 24px;
                   height: 24px;
@@ -667,11 +730,18 @@ const AppCss = styled.div`
                   border: 1px solid rgba(255, 255, 255, 0.6);
                   padding: 8px;
                   border-radius: 3px;
-                  /* margin-right: 8px; */
+                  transition: all 0.2s ease;
 
-                  /* &:last-child {
-                    margin-right: 0;
-                  } */
+                  path,
+                  circle {
+                    transition: all 0.2s ease;
+                  }
+
+                  &:hover {
+                    background: white;
+                    stroke: #0e42d2;
+                    border: 1px solid transparent;
+                  }
                 }
               }
             }
@@ -703,7 +773,9 @@ const AppCss = styled.div`
 function App() {
   const [value, setValue] = useState(30);
   useEffect(() => {
+    // eslint-disable-next-line
     var scene = document.getElementById("scene");
+    // eslint-disable-next-line
     var parallaxInstance = new Parallax(scene, {
       // hoverOnly: true,
     });
@@ -770,22 +842,68 @@ function App() {
                 </div>
                 <div className="top">
                   <div className="top-1">
-                    <svg
-                      width="106"
-                      height="55"
-                      viewBox="0 0 106 55"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M-0.000244141 55L25.7476 0H37.061L62.8088 55H48.4525L43.693 43.844H19.1156L14.3561 55H-0.000244141ZM31.2873 14.9787L23.797 32.844H38.9336L31.4433 14.9787H31.2873Z"
-                        fill="#4E5969"
-                      />
-                      <path
-                        d="M82.6976 55.0001C79.7061 55.0001 77.0557 54.4591 74.7465 53.3772C72.4897 52.2952 70.7053 50.8269 69.3933 48.9722C68.1337 47.0659 67.5039 44.9021 67.5039 42.4806C67.5039 39.75 68.2387 37.5862 69.7082 35.989C71.1777 34.3404 73.5394 33.1812 76.7933 32.5114C80.0472 31.7901 84.377 31.4295 89.7827 31.4295H92.7742V30.3475C92.7742 28.4928 92.2756 27.179 91.2785 26.4062C90.3338 25.6334 88.6806 25.247 86.3189 25.247C84.3245 25.247 82.1203 25.5561 79.7061 26.1744C77.2919 26.7926 74.9302 27.7458 72.6209 29.0338L69.0784 19.9919C70.3904 19.0646 72.0699 18.2403 74.1167 17.519C76.1635 16.7977 78.3153 16.2567 80.572 15.8961C82.8288 15.4839 84.9543 15.2778 86.9487 15.2778C93.404 15.2778 98.1799 16.6431 101.276 19.3737C104.425 22.1043 106 26.4062 106 32.2796V54.15H92.9317V48.7403C92.2494 50.6981 91.0161 52.2437 89.2316 53.3772C87.4472 54.4591 85.2692 55.0001 82.6976 55.0001ZM85.8465 46.0355C87.7884 46.0355 89.4153 45.4173 90.7274 44.1808C92.0919 42.9443 92.7742 41.3214 92.7742 39.3121V37.921H89.7827C86.6862 37.921 84.4033 38.2559 82.9338 38.9257C81.5167 39.5439 80.8082 40.5486 80.8082 41.9396C80.8082 43.1246 81.2281 44.1035 82.0678 44.8763C82.96 45.6491 84.2196 46.0355 85.8465 46.0355Z"
-                        fill="#4E5969"
-                      />
-                    </svg>
+                    <span>
+                      <svg
+                        width="112"
+                        height="63"
+                        viewBox="0 0 112 63"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M2 59L27.7478 4H39.0613L64.8091 59H50.4527L45.6933 47.844H21.1158L16.3564 59H2ZM33.2875 18.9787L25.7972 36.844H40.9338L33.4436 18.9787H33.2875Z"
+                          fill="#4E5969"
+                        />
+                        <path
+                          d="M84.6976 58.9996C81.7061 58.9996 79.0557 58.4586 76.7465 57.3767C74.4897 56.2947 72.7053 54.8264 71.3933 52.9717C70.1337 51.0654 69.5039 48.9016 69.5039 46.4801C69.5039 43.7495 70.2387 41.5857 71.7082 39.9885C73.1777 38.3399 75.5394 37.1807 78.7933 36.5109C82.0472 35.7896 86.377 35.429 91.7827 35.429H94.7742V34.3471C94.7742 32.4923 94.2756 31.1786 93.2785 30.4057C92.3338 29.6329 90.6806 29.2465 88.3189 29.2465C86.3245 29.2465 84.1203 29.5557 81.7061 30.1739C79.2919 30.7921 76.9302 31.7453 74.6209 33.0333L71.0784 23.9915C72.3904 23.0641 74.0699 22.2398 76.1167 21.5185C78.1635 20.7972 80.3153 20.2562 82.572 19.8956C84.8288 19.4834 86.9543 19.2773 88.9487 19.2773C95.404 19.2773 100.18 20.6426 103.276 23.3732C106.425 26.1038 108 30.4057 108 36.2791V58.1495H94.9317V52.7398C94.2494 54.6976 93.0161 56.2432 91.2316 57.3767C89.4472 58.4586 87.2692 58.9996 84.6976 58.9996ZM87.8465 50.035C89.7884 50.035 91.4153 49.4168 92.7274 48.1803C94.0919 46.9438 94.7742 45.3209 94.7742 43.3116V41.9206H91.7827C88.6862 41.9206 86.4033 42.2554 84.9338 42.9252C83.5167 43.5434 82.8082 44.5481 82.8082 45.9391C82.8082 47.1241 83.2281 48.103 84.0678 48.8758C84.96 49.6486 86.2196 50.035 87.8465 50.035Z"
+                          fill="#4E5969"
+                        />
+                        <rect
+                          x="4.39291"
+                          y="3.39291"
+                          width="104.214"
+                          height="56.2142"
+                          stroke="#5F00FB"
+                          strokeWidth="1.21417"
+                        />
+                        <rect
+                          x="1.39291"
+                          y="1.39291"
+                          width="5.21417"
+                          height="5.21417"
+                          fill="white"
+                          stroke="#5F00FB"
+                          strokeWidth="1.21417"
+                        />
+                        <rect
+                          x="105.393"
+                          y="1.39291"
+                          width="5.21417"
+                          height="5.21417"
+                          fill="white"
+                          stroke="#5F00FB"
+                          strokeWidth="1.21417"
+                        />
+                        <rect
+                          x="1.39291"
+                          y="56.8919"
+                          width="5.21417"
+                          height="5.21417"
+                          fill="white"
+                          stroke="#5F00FB"
+                          strokeWidth="1.21417"
+                        />
+                        <rect
+                          x="105.393"
+                          y="56.89"
+                          width="5.21417"
+                          height="5.21417"
+                          fill="white"
+                          stroke="#5F00FB"
+                          strokeWidth="1.21417"
+                        />
+                      </svg>
+                    </span>
                     <Skeleton
                       text={{ rows: 4, width: [78, 78, 60, 60] }}
                       image
@@ -851,6 +969,7 @@ function App() {
                           <div key={index}>
                             <img
                               src={src}
+                              alt="banner"
                               style={{
                                 width: "120%",
                               }}
@@ -928,18 +1047,18 @@ function App() {
                     <path
                       d="M83.8395 58.1957C83.8395 74.1393 81.3312 88.5106 77.3239 98.8453C75.3185 104.017 72.9647 108.108 70.4216 110.882C67.8795 113.655 65.2548 115.006 62.6594 115.006C60.0641 115.006 57.4393 113.655 54.8972 110.882C52.3542 108.108 50.0004 104.017 47.995 98.8453C43.9876 88.5106 41.4794 74.1393 41.4794 58.1957C41.4794 42.2521 43.9876 27.8808 47.995 17.5461C50.0004 12.3742 52.3542 8.28359 54.8972 5.50965C57.4393 2.73668 60.0641 1.38561 62.6594 1.38561C65.2548 1.38561 67.8795 2.73668 70.4216 5.50965C72.9647 8.28359 75.3185 12.3742 77.3239 17.5461C81.3312 27.8808 83.8395 42.2521 83.8395 58.1957Z"
                       stroke="white"
-                      stroke-width="2.77122"
+                      strokeWidth="2.77122"
                     />
                     <path
                       d="M52.068 76.5376C38.2605 68.5658 27.0687 59.2079 20.1222 50.5701C16.646 46.2474 14.2803 42.1636 13.1495 38.5743C12.0191 34.9863 12.1614 32.0377 13.4591 29.79C14.7568 27.5424 17.2392 25.9449 20.9117 25.1298C24.5855 24.3144 29.305 24.3213 34.7867 25.1705C45.7405 26.8674 59.4406 31.8808 73.2481 39.8526C87.0556 47.8244 98.2474 57.1823 105.194 65.8201C108.67 70.1428 111.036 74.2265 112.167 77.8158C113.297 81.4039 113.155 84.3525 111.857 86.6001C110.559 88.8478 108.077 90.4453 104.404 91.2604C100.731 92.0757 96.0111 92.0689 90.5294 91.2197C79.5756 89.5228 65.8755 84.5093 52.068 76.5376Z"
                       stroke="white"
-                      stroke-width="2.77122"
+                      strokeWidth="2.77122"
                       id="path-1"
                     />
                     <path
                       d="M73.2503 76.5376C87.0579 68.5658 98.2497 59.2079 105.196 50.5701C108.672 46.2474 111.038 42.1636 112.169 38.5743C113.299 34.9863 113.157 32.0377 111.859 29.79C110.562 27.5424 108.079 25.9449 104.407 25.1298C100.733 24.3144 96.0133 24.3213 90.5317 25.1705C79.5779 26.8674 65.8778 31.8808 52.0703 39.8526C38.2627 47.8244 27.0709 57.1823 20.1245 65.8201C16.6482 70.1428 14.2825 74.2265 13.1517 77.8158C12.0214 81.4039 12.1636 84.3525 13.4613 86.6001C14.759 88.8478 17.2414 90.4453 20.914 91.2604C24.5878 92.0757 29.3073 92.0689 34.7889 91.2197C45.7427 89.5228 59.4428 84.5093 73.2503 76.5376Z"
                       stroke="white"
-                      stroke-width="2.77122"
+                      strokeWidth="2.77122"
                       id="path-2"
                     />
                     <circle
@@ -974,10 +1093,18 @@ function App() {
                     <IconUser />
                   </div>
                   <div>
-                    <IconSubscribeAdd />
-                    <IconSubscribe />
-                    <IconSubscribed />
-                    <IconCommon />
+                    <span>
+                      <IconSubscribeAdd />
+                    </span>
+                    <span>
+                      <IconSubscribe />
+                    </span>
+                    <span>
+                      <IconSubscribed />
+                    </span>
+                    <span>
+                      <IconCommon />
+                    </span>
                   </div>
                 </div>
                 <div>
