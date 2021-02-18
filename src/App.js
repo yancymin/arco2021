@@ -74,7 +74,7 @@ const AppCss = styled.div`
     width: 84%;
     height: 400px;
     opacity: 0;
-    animation: heroSceneshow 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 0.4s;
+    animation: heroSceneshow 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 0.55s;
     will-change: scale;
 
     @keyframes heroSceneshow {
