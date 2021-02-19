@@ -73,22 +73,20 @@ const AppCss = styled.div`
     position: relative;
     width: 84%;
     height: 400px;
-    opacity: 0;
-    animation: heroSceneshow 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 0.55s;
-    will-change: scale;
+    /* opacity: 0; */
+    /* animation: heroSceneshow 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 0.55s;
+    will-change: scale; */
 
-    @keyframes heroSceneshow {
+    /* @keyframes heroSceneshow {
       from {
         opacity: 0;
-        /* filter: blur(20px); */
         transform: scale3d(0.9, 0.9, 0.9);
       }
       to {
         opacity: 1;
-        /* filter: blur(0); */
         transform: scale3d(1, 1, 1);
       }
-    }
+    } */
 
     & > div {
       width: 100%;
@@ -148,7 +146,7 @@ const AppCss = styled.div`
       box-sizing: border-box;
       backdrop-filter: blur(10px);
       border-radius: 8px;
-      animation: heroWindowShow 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      /* animation: heroWindowShow 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards; */
 
       @keyframes heroWindowShow {
         from {
@@ -813,6 +811,50 @@ const AppCss = styled.div`
 
 function App() {
   const [value, setValue] = useState(30);
+  useEffect(() => {
+    let tl = gsap.timeline();
+    tl.from(".bg_light", {
+      opacity: 0,
+      duration: 0.2,
+      ease: "ease",
+    })
+      .from(".motion-content", {
+        y: "110%",
+        scale: 0.86,
+        duration: 1.8,
+        ease: "power3.inOut",
+      })
+      .from(
+        "#scene",
+        {
+          opacity: 0,
+          scale: "0.9",
+          duration: 1,
+          ease: "cubic-bezier(0.34, 1.56, 0.64, 1) ",
+        },
+        "start-=0.55"
+      )
+      .from(
+        ".top > div, .motion-content_bottom > div, .hero-chart > div, .top-3 > button, .color-panel > div",
+        {
+          opacity: 0,
+          stagger: {
+            amount: 0.2,
+          },
+        },
+        "start-=0.8"
+      )
+      .from(
+        "#scene div",
+        {
+          opacity: 0,
+          stagger: {
+            amount: 1.4,
+          },
+        },
+        "start-=0.65"
+      );
+  });
   useEffect(() => {
     // eslint-disable-next-line
     var scene = document.getElementById("scene");
