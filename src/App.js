@@ -305,6 +305,7 @@ const AppCss = styled.div`
 
             .hero-chart {
               width: 100%;
+              height: 58px;
               display: flex;
               align-items: flex-end;
               & > div {
@@ -835,14 +836,55 @@ function App() {
         "start-=0.55"
       )
       .from(
-        ".top > div, .motion-content_bottom > div, .hero-chart > div, .top-3 > button, .color-panel > div",
+        ".hero-chart > div",
+        {
+          opacity: 0,
+          height: "100%",
+          stagger: {
+            amount: 0.6,
+          },
+        },
+        "start-=1"
+      )
+      .from(
+        ".top-3 button",
         {
           opacity: 0,
           stagger: {
-            amount: 0.2,
+            amount: 0.6,
+          },
+        },
+        "start-=1"
+      )
+      .from(
+        ".color-panel > div",
+        {
+          opacity: 0,
+          stagger: {
+            amount: 0.3,
+          },
+        },
+        "start-=1"
+      )
+      .from(
+        ".top > div, .motion-content_bottom > div",
+        {
+          opacity: 0,
+          stagger: {
+            amount: 0.4,
           },
         },
         "start-=0.8"
+      )
+      .from(
+        "#code-block path",
+        {
+          opacity: 0,
+          stagger: {
+            amount: 0.4,
+          },
+        },
+        "<0.4"
       )
       .from(
         "#scene div",
@@ -1126,6 +1168,7 @@ function App() {
                     viewBox="0 0 125 117"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
+                    id="react-motion"
                   >
                     <path
                       d="M83.8395 58.1957C83.8395 74.1393 81.3312 88.5106 77.3239 98.8453C75.3185 104.017 72.9647 108.108 70.4216 110.882C67.8795 113.655 65.2548 115.006 62.6594 115.006C60.0641 115.006 57.4393 113.655 54.8972 110.882C52.3542 108.108 50.0004 104.017 47.995 98.8453C43.9876 88.5106 41.4794 74.1393 41.4794 58.1957C41.4794 42.2521 43.9876 27.8808 47.995 17.5461C50.0004 12.3742 52.3542 8.28359 54.8972 5.50965C57.4393 2.73668 60.0641 1.38561 62.6594 1.38561C65.2548 1.38561 67.8795 2.73668 70.4216 5.50965C72.9647 8.28359 75.3185 12.3742 77.3239 17.5461C81.3312 27.8808 83.8395 42.2521 83.8395 58.1957Z"
@@ -1197,6 +1240,7 @@ function App() {
                     viewBox="0 0 148 110"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
+                    id="code-block"
                   >
                     <path
                       opacity="0.9"
