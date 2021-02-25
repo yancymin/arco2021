@@ -26,6 +26,20 @@ import floatIcon1 from "../src/assets/logo_ArcoMaterial_w.svg";
 import floatIcon2 from "../src/assets/logo_ArcoPro_w.svg";
 import floatIcon3 from "../src/assets/logo_ChartSpace_w.svg";
 import floatIcon4 from "../src/assets/logo_DesignLab_w.svg";
+import picNavBar from "../src/assets/navbar.svg";
+import picNavBar_1 from "../src/assets/navbar-item-1.svg";
+import picNavBar_2 from "../src/assets/navbar-item-2.svg";
+import picNavBar_3 from "../src/assets/navbar-item-3.svg";
+import picNavBar_4_1 from "../src/assets/navbar-item-4-1.png";
+import picNavBar_4_2 from "../src/assets/navbar-item-4-2.png";
+import picNavBar_4_3 from "../src/assets/navbar-item-4-3.png";
+import picNavBar_4_4 from "../src/assets/navbar-item-4-4.png";
+// import vid_1 from "../src/assets/v-1.mov";
+// import vid_2 from "../src/assets/v-2.mov";
+// import vid_3 from "../src/assets/v-3.mov";
+// import vid_4 from "../src/assets/v-4.mov";
+// import vid_5 from "../src/assets/v-5.mov";
+// import vid_6 from "../src/assets/v-6.mov";
 import Parallax from "parallax-js";
 import { gsap, MotionPathPlugin } from "gsap/all";
 gsap.registerPlugin(MotionPathPlugin);
@@ -808,10 +822,142 @@ const AppCss = styled.div`
       } */
     }
   }
+
+  .nav-open {
+    opacity: 1 !important;
+  }
+
+  .cover {
+    opacity: 0;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    position: absolute;
+    content: "";
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  #navbar {
+    width: 1440px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & > img {
+      z-index: 999;
+      background: white;
+    }
+
+    .dropdown {
+      position: relative;
+      transform: translateY(-110%);
+      width: 1440px;
+      padding: 40px 0;
+      background: white;
+      display: flex;
+      justify-content: center;
+
+      & > div {
+        display: grid;
+        width: 1180px;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 40px;
+      }
+
+      .left {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-gap: 40px;
+      }
+
+      .right {
+        display: grid;
+        grid-gap: 24px;
+
+        & > div {
+          img {
+            width: 208px;
+          }
+        }
+      }
+    }
+  }
+  /* #videos {
+    width: 90vw;
+    height: 800px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    margin: 20px;
+
+    div {
+      overflow: hidden;
+      border: 1px solid #eee;
+
+      video {
+        height: 125%;
+      }
+    }
+  } */
 `;
 
 function App() {
   const [value, setValue] = useState(30);
+  const [navOpen, setNavOpen] = useState(false);
+
+  // const coverClose = () => {
+  //   console.log(navOpen)
+  //   setNavOpen(false);
+  // };
+
+  const navToggle = () => {
+    let tl2 = gsap.timeline();
+    if (navOpen) {
+      tl2.to(".dropdown", {
+        y: "-110%",
+        duration: 0.3,
+        ease: "cubic-bezier(0.16, 1, 0.3, 1)",
+      });
+    } else {
+      tl2
+        .to(".dropdown", {
+          y: 0,
+          duration: 0.4,
+          ease: "cubic-bezier(0.25, 1, 0.5, 1)",
+        })
+        .from(
+          ".dropdown .left, .dropdown .right",
+          {
+            opacity: 0,
+            duration: 0.3,
+            x: -20,
+            ease: "cubic-bezier(0.25, 1, 0.5, 1)",
+            stagger: {
+              amount: 0.1,
+            },
+          }
+          // "<0.03"
+        )
+        .from(
+          ".dropdown .right div img",
+          {
+            opacity: 0,
+            duration: 0.35,
+            ease: "cubic-bezier(0.25, 1, 0.5, 1)",
+            x: -16,
+            stagger: {
+              amount: 0.2,
+            },
+          },
+          "<0.2"
+        );
+    }
+    setNavOpen(!navOpen);
+  };
+
   useEffect(() => {
     let tl = gsap.timeline();
     tl.from(".bg_light", {
@@ -933,6 +1079,27 @@ function App() {
   return (
     <AppCss className="App">
       <GlobalStyle />
+      <section id="navbar">
+        <img src={picNavBar} alt="picNavBar" onClick={navToggle} />
+        <div className="dropdown">
+          <div>
+            <div className="left">
+              <img src={picNavBar_1} alt="picNavBar" />
+              <img src={picNavBar_2} alt="picNavBar" />
+            </div>
+            <div className="right">
+              <img src={picNavBar_3} alt="picNavBar" />
+              <div>
+                <img src={picNavBar_4_1} alt="picNavBar" />
+                <img src={picNavBar_4_2} alt="picNavBar" />
+                <img src={picNavBar_4_3} alt="picNavBar" />
+                <img src={picNavBar_4_4} alt="picNavBar" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <span className={`cover ${navOpen ? "nav-open" : ""}`}></span>
       <main>
         <div className="hero">
           <div className="hero-motion">
@@ -1377,6 +1544,27 @@ function App() {
           </div>
         </div>
       </main>
+
+      {/* <section id="videos">
+        <div>
+          <video loop autoPlay muted src={vid_1} type="video/mp4" />
+        </div>
+        <div>
+          <video loop autoPlay muted src={vid_2} type="video/mp4" />
+        </div>
+        <div>
+          <video loop autoPlay muted src={vid_3} type="video/mp4" />
+        </div>
+        <div>
+          <video loop autoPlay muted src={vid_4} type="video/mp4" />
+        </div>
+        <div>
+          <video loop autoPlay muted src={vid_5} type="video/mp4" />
+        </div>
+        <div>
+          <video loop autoPlay muted src={vid_6} type="video/mp4" />
+        </div>
+      </section> */}
     </AppCss>
   );
 }
