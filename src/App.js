@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "@arco-design/web-react/dist/css/arco.css";
+import "./App.css";
 import styled, { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import logo from "../src/assets/logo.svg";
@@ -34,6 +35,19 @@ import picNavBar_4_1 from "../src/assets/navbar-item-4-1.png";
 import picNavBar_4_2 from "../src/assets/navbar-item-4-2.png";
 import picNavBar_4_3 from "../src/assets/navbar-item-4-3.png";
 import picNavBar_4_4 from "../src/assets/navbar-item-4-4.png";
+
+import prArcoPro_b from "../src/assets/panel/logo_ArcoPro_blue.svg";
+import prArcoPro from "../src/assets/panel/logo_ArcoPro.svg";
+import prDesignLab_b from "../src/assets/panel/logo_DesignLab_blue.svg";
+import prDesignLab from "../src/assets/panel/logo_DesignLab.svg";
+import prArcoMaterial_b from "../src/assets/panel/logo_ArcoMaterial_blue.svg";
+import prArcoMaterial from "../src/assets/panel/logo_ArcoMaterial.svg";
+import prChartSpace_b from "../src/assets/panel/logo_ChartSpace_blue.svg";
+import prChartSpace from "../src/assets/panel/logo_ChartSpace.svg";
+import prFontMall_b from "../src/assets/panel/logo_FontMall_blue.svg";
+import prFontMall from "../src/assets/panel/logo_FontMall.svg";
+import prBrandStore_b from "../src/assets/panel/logo_BrandStore_blue.svg";
+import prBrandStore from "../src/assets/panel/logo_BrandStore.svg";
 // import vid_1 from "../src/assets/v-1.mov";
 // import vid_2 from "../src/assets/v-2.mov";
 // import vid_3 from "../src/assets/v-3.mov";
@@ -48,6 +62,60 @@ const imageSrc = [heroBanner1, heroBanner2, heroBanner3];
 const GlobalStyle = createGlobalStyle`
   ${reset}
   `;
+
+const logoData = [
+  {
+    logo: prArcoPro,
+    logoB: prArcoPro_b,
+    title: "ArcoPro",
+    des: "中后台最佳实践",
+  },
+  {
+    logo: prDesignLab,
+    logoB: prDesignLab_b,
+    title: "DesignLab",
+    des: "设计系统配置",
+  },
+  {
+    logo: prArcoMaterial,
+    logoB: prArcoMaterial_b,
+    title: "ArcoMaterial",
+    des: "物料平台",
+  },
+  {
+    logo: prChartSpace,
+    logoB: prChartSpace_b,
+    title: "ChartSpace",
+    des: "图表库",
+  },
+  {
+    logo: prFontMall,
+    logoB: prFontMall_b,
+    title: "FontMall",
+    des: "字体配置平台",
+  },
+  {
+    logo: prBrandStore,
+    logoB: prBrandStore_b,
+    title: "BrandStore",
+    des: "品牌资源平台",
+  },
+];
+
+const LogoItem = (props) => {
+  return (
+    <div className="panel-item">
+      <div className="logo">
+        <img src={props.logo} alt="prLogo" />
+        <img src={props.logoB} alt="prLogo" />
+      </div>
+      <section>
+        <p>{props.title}</p>
+        <span>{props.des}</span>
+      </section>
+    </div>
+  );
+};
 
 const AppCss = styled.div`
   main {
@@ -902,16 +970,178 @@ const AppCss = styled.div`
       }
     }
   } */
+
+  .panel-open {
+    .panel-bg {
+      opacity: 1 !important;
+      transform: scale(1) translateY(0) !important;
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1) !important;
+      border: 1px solid #e5e6eb !important;
+    }
+  }
+
+  .menu-icon {
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+
+  #panel {
+    z-index: 999999;
+    position: fixed;
+    top: 90px;
+    left: 48px;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 32px;
+
+    .panel-bg {
+      opacity: 0;
+      z-index: 0;
+      position: absolute;
+      top: -32px;
+      left: -32px;
+      width: 100%;
+      height: 100%;
+      padding: 32px;
+      background: white;
+      border: 1px solid transparent;
+      box-shadow: 0px 0 0 rgba(0, 0, 0, 0);
+      border-radius: 8px;
+      transform-origin: top left;
+      transform: scale(0.55) translateY(-6px);
+      /* transition-delay: 0.5s; */
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .panel-item {
+      opacity: 0;
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      &:hover {
+        &::after {
+          opacity: 1;
+          transform: scale(1);
+        }
+
+        section {
+          p {
+            transform: translateY(-8px);
+            color: #1d2129;
+          }
+          span {
+            transform: translateY(-4px);
+            opacity: 1;
+          }
+        }
+
+        img {
+          &:nth-of-type(2) {
+            opacity: 0;
+          }
+        }
+      }
+
+      &::after {
+        position: absolute;
+        z-index: -1;
+        content: "";
+        width: 100%;
+        height: 100%;
+        padding: 16px;
+        background: #f7f8fa;
+        border-radius: 4px;
+        left: -16px;
+        opacity: 0;
+        transform: scale(0.94);
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      .logo {
+        position: relative;
+        width: 24px;
+        height: 24px;
+        margin-right: 16px;
+        img {
+          position: absolute;
+          transition: all 0.25s ease-out;
+        }
+      }
+
+      p {
+        font-family: "Nunito Sans", sans-serif;
+        font-weight: 800;
+        color: #4e5969;
+        transition: all 0.2s ease-out;
+      }
+      span {
+        font-family: PingFang SC;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 12px;
+        color: #4e5969;
+        position: absolute;
+        word-break: keep-all;
+        transform: translateY(0);
+        opacity: 0;
+        transition: all 0.2s ease-out;
+      }
+    }
+  }
 `;
 
 function App() {
   const [value, setValue] = useState(30);
   const [navOpen, setNavOpen] = useState(false);
+  const [panelOpen, setPanelOpen] = useState(false);
 
   // const coverClose = () => {
   //   console.log(navOpen)
   //   setNavOpen(false);
   // };
+
+  const handlePanel = () => {
+    let panelTL = gsap.timeline();
+    let panelTL2 = gsap.timeline();
+    if (!panelOpen) {
+      panelTL.fromTo(
+        ".panel-item",
+        {
+          opacity: 0,
+          duration: 0.3,
+          y: -4,
+          delay: 0.1,
+          stagger: {
+            amount: 0.2,
+          },
+        },
+        {
+          opacity: 1,
+          duration: 0.3,
+          y: 0,
+          delay: 0.1,
+          stagger: {
+            amount: 0.2,
+          },
+        }
+      );
+    } else {
+      panelTL2.to(".panel-item", {
+        opacity: 0,
+        duration: 0.2,
+        y: -4,
+      });
+    }
+    setPanelOpen(!panelOpen);
+  };
 
   const navToggle = () => {
     let tl2 = gsap.timeline();
@@ -1565,6 +1795,37 @@ function App() {
           <video loop autoPlay muted src={vid_6} type="video/mp4" />
         </div>
       </section> */}
+      <div className="menu-icon" onClick={handlePanel}>
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M2.5 5L5 5L5 2.5L2.5 2.5L2.5 5ZM5 11.25L2.5 11.25L2.5 8.75L5 8.75L5 11.25ZM17.5 11.25L15 11.25L15 8.75L17.5 8.75L17.5 11.25ZM8.75 11.25L11.25 11.25L11.25 8.75L8.75 8.75L8.75 11.25ZM5 17.5L2.5 17.5L2.5 15L5 15L5 17.5ZM15 17.5L17.5 17.5L17.5 15L15 15L15 17.5ZM11.25 17.5L8.75 17.5L8.75 15L11.25 15L11.25 17.5ZM17.5 5L15 5L15 2.5L17.5 2.5L17.5 5ZM8.75 5L11.25 5L11.25 2.5L8.75 2.5L8.75 5Z"
+            fill="#165DFF"
+          />
+        </svg>
+      </div>
+      <section id="panel" className={`${panelOpen ? "panel-open" : ""}`}>
+        {/* <div className="panel_main"> */}
+        {logoData.map((t) => {
+          return (
+            <LogoItem
+              logoB={t.logoB}
+              logo={t.logo}
+              title={t.title}
+              des={t.des}
+            />
+          );
+        })}
+        {/* </div> */}
+        <span className="panel-bg"></span>
+      </section>
     </AppCss>
   );
 }
