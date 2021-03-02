@@ -74,7 +74,7 @@ const logoData = [
     logo: prDesignLab,
     logoB: prDesignLab_b,
     title: "DesignLab",
-    des: "设计系统配置",
+    des: "设计系统配置平台",
   },
   {
     logo: prArcoMaterial,
@@ -1012,7 +1012,6 @@ const AppCss = styled.div`
       border-radius: 8px;
       transform-origin: top left;
       transform: scale(0.55) translateY(-6px);
-      /* transition-delay: 0.5s; */
       transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
